@@ -1,0 +1,54 @@
+<%= form_for([@doc1.tender, @doc1]) do |f| %>
+  <% if @doc1.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@doc1.errors.count, "error") %> prohibited this doc1 from being saved:</h2>
+
+      <ul>
+      <% @doc1.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :debit_head %>
+    <%= f.text_field :debit_head %>
+  </div>
+
+  <div class="field">
+    <%= f.label :item_name %>
+    <%= f.text_field :item_name %>
+  </div>  
+
+  <div class="field">
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= f.label :estimated_cost %>
+    <%= f.text_field :estimated_cost %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type_of_tender %>
+    <% types = { "Equipment" => 0,
+      "Software" => 1,
+      "Furniture" => 2,
+      "Others" => 3,
+    }%>
+    <fieldset>
+      <% opts = types.sort  %>
+      <% opts.each do |opa|%>
+        <%= f.radio_button :type_of_tender , opa[1] %>
+        <label for="<%= opa[1]%>"> <%= opa[0]%> </label>
+      <%end%>
+    </fieldset>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

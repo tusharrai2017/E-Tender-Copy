@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @tender.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @tender.body %>
+</p>
+
+<% if can? :update , @tender %>
+<%= link_to 'Edit', edit_tender_path(@tender) %> |
+<% end %>
+<%= link_to 'Back', tenders_path %>
+<br>
+<%= link_to 'Doc1', tender_doc1s_path(@tender.id) %>
+<%= link_to 'Doc2', tender_doc2s_path(@tender.id) %>

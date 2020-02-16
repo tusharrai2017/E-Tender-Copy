@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Doc2</title>
+	<style type="text/css">
+		* {
+  			margin: 0;
+  			padding: 0;
+		}
+		.outer_boundary{
+			border-style: solid;
+			border-width: 5px;
+			margin: 2px;
+			padding: 2px;
+		}
+
+		.inner_boundary{
+			border-style: solid;
+			border-width: 1px;
+			padding: 20px;
+		}
+
+		.header{
+			height: auto;
+		}
+
+		.doc_no{
+			border-style: solid;
+			border-width: 1px;
+			float: right;
+			padding: 2px;
+			font-weight: bold;
+			font-size: 25px;
+		}
+
+		.title_title{
+			border-style: solid;
+			border-width: 1px;
+			text-align: center;
+			margin:0 auto;
+			padding: 10px;
+			display:table;
+			font-weight: bold;
+			font-size: 25px;
+		}
+		.title_text{
+			font-weight: bold;
+			text-align: center;
+			font-size: 25px;
+		}
+
+		.not_paded{
+    		margin: 20px -20px 20px;
+    		border: 0;
+    		border-top: 2px solid;
+		}
+
+		.body,.footer{
+			font-size: 20px;
+		}
+
+		.ref_no{
+			text-align:left;
+			font-weight: bold;
+		}
+
+		.date{
+			float:right;
+			font-weight: bold;	
+		}
+
+		.form_title{
+			font-weight: bold;
+			text-align: center;
+			font-size: 18px;			
+		}
+
+		table {
+		  border-collapse: collapse;
+		}
+
+		table, th, td {
+		  border: 1px solid black;
+		}
+
+		.fixed_width {
+		  display: inline-block;
+		  width: 300px;
+		}
+	</style>
+</head>
+	<%=link_to 'Download PDF document',download_tender_doc2_path(@doc2.tender, @doc2,format: :pdf) %>
+	<%= link_to 'Back', tender_doc2s_path(@doc2.tender) %>
+<body class="outer_boundary">
+	<div class="inner_boundary">
+		<% @doc1s.each do |doc|%>
+		<div class="header">
+			<p class="doc_no">DOC 2</p>
+			<br><br>
+			<span class="title_title">MEETING NOTICE<br>(finalization of specifications)</span>
+			<br><br>
+			<div class="title_text">
+				Notice for Meeting of Purchase Committee for finalization of Specifications;Prospective Suppliers<br>
+				Administrative Approval Ref. No. and Date :
+			</div>
+		</div>
+		<hr class="not_paded">
+		<div class="body">
+			<p class="ref_no">
+    			Ref. No. <%= get_ref_id(doc) %>DOC2
+    			<span style="float:right;">
+    			    Date: <%= doc.created_at.strftime("%d/%m/%Y")%>
+    			</span>
+			</p>
+			<br><br>
+			<p>A Meeting is convened for finalization of Specifications and prospective suppliers.
+			</p>
+			<br>
+			<p>Debit Head: <%= doc.debit_head %>
+			</p>
+			<br>
+			<table >
+				<tr>
+					<td><br>Item Name: <span>  </span><br></td>
+					<td><%= doc.item_name %></td>
+				</tr>
+				<tr>
+					<td><br>Type:<br>
+					<span>  </span><br></td>
+					<td><%= set_tender_type(doc) %></td>
+				</tr>
+				<tr>
+					<td><br>Quantity: <span>  </span><br></td>
+					<td><%= number_with_delimiter(doc.quantity) %></td>
+				</tr>
+				<tr>
+					<td><br>Total Estimated Cost:
+						<span>  </span><br></td>
+					<td><%= number_to_currency(doc.estimated_cost,unit: "₹" ) %></td>
+				</tr>
+				<tr>
+					<td>
+						<br>For Cost > 1 Lakh | EMD<br>
+					</td>
+					<td>
+						<br>2% of Estimated Cost:     Rs. <%= percent_estimated_cost(doc.estimated_cost) %><br>
+					</td>
+				</tr>
+				<% end %>
+				<% @doc2s.each do |doc|%>
+				<tr>
+					<td><br>
+						Date and Time: <br>
+
+					</td>
+					<td>
+						<%= doc.created_at.strftime("%m/%d/%Y %I:%M %p")%>
+					</td>
+				</tr>
+				<tr>
+					<td><br>
+						Venue: <span>  </span><br>
+					</td>
+					<td><%= doc.venue %></td>
+				</tr>
+				<tr>
+					<td><br>
+						You are requested to make it covenient to attend the meeting.
+
+						<br><br><br>
+
+						                                               Name & Signature of Faculty i/c of purchase(buyer)<br>
+					</td>
+				</tr>
+			</table>
+			<% end %>
+			<br>
+		</div>
+		<hr>
+		<br><br><br><br>
+		<div class="footer">
+			<p>To
+			(Purchase Committee Members) </p>
+			<br><br><br><br>
+			<p>Encl:Draft Specifications of the item.</p>
+			<br>
+			<br>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style type="text/css">
+		.main{
+		display: inline-block;
+	    background-color:white;
+	    text-align: center;
+	    width: 100px;
+	    height: 100px;
+	    line-height: 2.4em;
+	    margin-top:200px;
+	    margin-left: 500px;
+	    border-radius: 50px;
+		}
+	</style>
+  <title>E-Tender NITK</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+	<body>
+		<div class="main">
+			<%= logout_helper %>
+			<p>Hello ji</p>
+			<% if current_user%>
+			<%= link_to "Create and view tenders",tenders_path %>
+			<% else %>
+			<%= link_to "Please sign in to Portal",new_user_session_path %>
+			<% end%>
+		</div>
+	</body>
+</html>
